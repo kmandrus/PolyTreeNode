@@ -8,6 +8,25 @@ class PolyTreeNode
         @children = []
     end
 
+    def dfs(target_value)
+        return self if value == target_value
+        children.each do |child| 
+            result = child.dfs(target_value)
+            return result if result
+        end
+        nil
+    end
+
+    def bfs(target_value)
+        queue = [self]
+        while queue.length > 0 do
+            current_node = queue.shift
+            return current_node if current_node.value == target_value
+            current_node.children.each { |child| queue.push(child) }
+        end
+        nil
+    end
+
     def parent
         @parent
     end
@@ -50,4 +69,12 @@ class PolyTreeNode
         
     end
 
+    def inspect()
+        @value.inspect
+    end
+
+end
+
+nodes = ('a'..'g').to_a.map do |value|
+    PolyTreeNode.new(value)
 end
