@@ -63,7 +63,6 @@ class PolyTreeNode
         if !@children.include?(child)
             raise "not a child of the node"
         else
-            @children.delete(child)
             child.parent = nil
         end
         
